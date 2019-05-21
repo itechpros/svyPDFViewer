@@ -3221,7 +3221,7 @@ var OverlayManager = overlayManager.OverlayManager;
 var activeService = null;
 function renderPage(activeServiceOnEntry, pdfDocument, pageNumber, size) {
   var scratchCanvas = activeService.scratchCanvas;
-  var PRINT_RESOLUTION = 150;
+  var PRINT_RESOLUTION = 300;
   var PRINT_UNITS = PRINT_RESOLUTION / 72.0;
   scratchCanvas.width = Math.floor(size.width * PRINT_UNITS);
   scratchCanvas.height = Math.floor(size.height * PRINT_UNITS);
@@ -3236,7 +3236,7 @@ function renderPage(activeServiceOnEntry, pdfDocument, pageNumber, size) {
     var renderContext = {
       canvasContext: ctx,
       transform: [PRINT_UNITS, 0, 0, PRINT_UNITS, 0, 0],
-      viewport: pdfPage.getViewport(2, size.rotation),
+      viewport: pdfPage.getViewport(1, size.rotation),
       intent: 'print'
     };
     return pdfPage.render(renderContext).promise;
@@ -5891,7 +5891,7 @@ var PDFThumbnailView = function PDFThumbnailViewClosure() {
       this.pdfPage = pdfPage;
       this.pdfPageRotate = pdfPage.rotate;
       var totalRotation = (this.rotation + this.pdfPageRotate) % 360;
-      this.viewport = pdfPage.getViewport(2, totalRotation);
+      this.viewport = pdfPage.getViewport(1, totalRotation);
       this.reset();
     },
     reset: function PDFThumbnailView_reset() {
@@ -6933,7 +6933,7 @@ var PDFViewer = function pdfViewer() {
     },
     getPagesOverview: function () {
       var pagesOverview = this._pages.map(function (pageView) {
-        var viewport = pageView.pdfPage.getViewport(2);
+        var viewport = pageView.pdfPage.getViewport(1);
         return {
           width: viewport.width,
           height: viewport.height,
