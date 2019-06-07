@@ -2212,3 +2212,9 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
     display: none;
   }
 }
+
+
+.printDPI {
+  font-size: .5em;
+  margin-top: .5em;
+}

@@ -3209,6 +3209,10 @@ exports.Preferences = Preferences;
 
 "use strict";
 
+function getPrintDPI() {
+  var dpi = document.getElementById('printDPI')
+  return dpi && dpi.options[dpi.selectedIndex].value / 1 || 300
+}
 
 var uiUtils = __webpack_require__(0);
 var overlayManager = __webpack_require__(4);
@@ -3221,7 +3225,7 @@ var OverlayManager = overlayManager.OverlayManager;
 var activeService = null;
 function renderPage(activeServiceOnEntry, pdfDocument, pageNumber, size) {
   var scratchCanvas = activeService.scratchCanvas;
-  var PRINT_RESOLUTION = 300;
+  var PRINT_RESOLUTION = getPrintDPI();
   var PRINT_UNITS = PRINT_RESOLUTION / 72.0;
   scratchCanvas.width = Math.floor(size.width * PRINT_UNITS);
   scratchCanvas.height = Math.floor(size.height * PRINT_UNITS);
